@@ -4,9 +4,6 @@ get '/' do
   erb :index
 end
 
-get '/game' do
-  erb :game
-end
 
 get '/results/finished' do 
   @game = Game.last
@@ -18,20 +15,27 @@ get '/game/again' do
   @players = []
   @players << Game.last.players.first
   @players << Game.last.players.last
-  erb :game
+  erb :_game
 end
 
 ############# POST ################
 
 post '/game' do
-  if params[:player_1].downcase == params[:player_2].downcase
-    @message = "You can't race against yourself!"
-    erb :index
-  else
+  if request.xhr?
     @players = []
-    @players << Player.find_or_create_by(name: params[:player_1])
-    @players << Player.find_or_create_by(name: params[:player_2])
-    erb :game
+    @players << Player.find_or_create_by(name: params[:pup_1])
+    @players << Player.find_or_create_by(name: params[:pup_2])
+    erb :_game, layout: false
+  else
+    if params[:player_1].downcase == params[:player_2].downcase
+      @message = "You can't race against yourself!"
+      erb :index
+    else
+      @players = []
+      @players << Player.find_or_create_by(name: params[:player_1])
+      @players << Player.find_or_create_by(name: params[:player_2])
+      erb :_game
+    end
   end
 end
 

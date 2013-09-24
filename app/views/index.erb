@@ -1,9 +1,10 @@
 <h1>Step into The Light and race!</h1>
 <form id="start" action='/game' method='POST'>
-  <input type="text" placeholder="Enter Player 1 Name" name="player_1">
-  <input type="text" placeholder="Enter Player 2 Name" name="player_2">
+  <input id='play_1' type="text" placeholder="Enter Player 1 Name" name="player_1">
+  <input id='play_2' type="text" placeholder="Enter Player 2 Name" name="player_2">
   <input type="submit" value="GO RACE BRO!">
 </form>
 <% if @message %>
   <%= @message %>
 <% end %>
+<div id='board'></div>

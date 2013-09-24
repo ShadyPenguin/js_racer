@@ -2,9 +2,25 @@ $(document).ready(function(){
 
   var game_length = $('tr:first').children().length;
   
-  $(document).keyup(function(event){
+  // // AJAX kind of working below
 
-    if (winner == false) {
+  // $('#start').on('submit', function(event) { 
+  //   event.preventDefault();
+
+  //   var data = { pup_1: $('play_1').text(), 
+  //     pup_2: $('play_2').text() };
+  //     console.log(data);
+  //   $.post('/game', data, function(response) {
+  //     $('body').replaceWith(response);
+  //   });
+  // });
+
+  // // END AJAX
+    
+      
+  $(document).keyup(function(event) {
+
+    if (!winner) {
 
       if (event.keyCode == 13) {
         move_player('#player1_strip');
