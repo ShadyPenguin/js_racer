@@ -8,8 +8,9 @@ get '/game' do
   erb :game
 end
 
-get '/results' do 
-  erb :index
+get '/results/finished' do 
+  @game = Game.last
+  erb :results
 end
 
 get '/results/:id' do
@@ -33,5 +34,9 @@ post '/game' do
 end
 
 post '/results' do
-  redirect to '/results'
+  game = Game.create(winner: params[:winner],
+    loser: params[:loser])
+  Player.find_by_name(params[:winner]).games << game
+  Player.find_by_name(params[:loser]).games << game
+   redirect to ('/results/finished')
 end
