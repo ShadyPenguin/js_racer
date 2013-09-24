@@ -10,6 +10,7 @@ end
 
 get '/results/finished' do 
   @game = Game.last
+  p @game
   erb :results
 end
 
@@ -29,7 +30,6 @@ post '/game' do
     @players << Player.find_or_create_by(name: params[:player_1])
     @players << Player.find_or_create_by(name: params[:player_2])
     erb :game
-    # redirect to '/game'
   end
 end
 
@@ -38,5 +38,5 @@ post '/results' do
     loser: params[:loser])
   Player.find_by_name(params[:winner]).games << game
   Player.find_by_name(params[:loser]).games << game
-   redirect to ('/results/finished')
+  redirect to ('/results/finished')
 end
