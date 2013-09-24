@@ -1,14 +1,12 @@
-$(document).ready(function(e){
+$(document).ready(function(){
+
   var game_length = $('tr:first').children().length;
-
   
-
-
   $(document).keyup(function(event){
 
     if (winner == false) {
 
-      if (event.keyCode == 38) {
+      if (event.keyCode == 13) {
         move_player('#player1_strip');
         player_1_counter += 1;
       }
@@ -22,7 +20,9 @@ $(document).ready(function(e){
         player_1_counter += 1
         
         var stats = {winner: winner, loser: loser}
-        $.post('/results', stats, function() {});
+        $.post('/results', stats, function(response) {
+          $('body').replaceWith(response);
+        });
       }
       else if (player_2_counter == game_length) {
         winner = $('#p2').text();
@@ -30,7 +30,9 @@ $(document).ready(function(e){
         player_2_counter += 1
 
         var stats = {winner: winner, loser: loser}
-        $.post('/results', stats, function() {});
+        $.post('/results', stats, function(response) {
+          $('body').replaceWith(response);
+        });
       }
     }
 

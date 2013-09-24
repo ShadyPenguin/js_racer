@@ -14,9 +14,11 @@ get '/results/finished' do
   erb :results
 end
 
-get '/results/:id' do
-  @game = Game.find_by_id(params[:id])
-  erb :results
+get '/game/again' do 
+  @players = []
+  @players << Game.last.players.first
+  @players << Game.last.players.last
+  erb :game
 end
 
 ############# POST ################
