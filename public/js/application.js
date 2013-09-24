@@ -12,25 +12,15 @@ $(document).ready(function(){
       console.log(player_2_counter);
     }
     if (player_1_counter == game_length) {
-      alert("Player 1 wins!");
+      alert($('#p1').text() + " Wins!");
+      $.post('/results');
       player_1_counter += 1;
     }
     else if (player_2_counter == game_length) {
-      alert("Player 2 wins!");
+      alert($('#p2').text() + " Wins!");
       player_2_counter += 1;
     }
   });
- 
-  // $.ajax({
-  //   type: "POST",
-  //   url: "/results/:id"
-  // });
-
- // }
-  // console.log(player);
-  // $('38').keypress(move_player("#player1_strip"));
-  // move_player("#player2_strip");
- 
 });
  
 var move_player = function(player) {
@@ -39,3 +29,4 @@ var move_player = function(player) {
  
 var player_1_counter = 1;
 var player_2_counter = 1;
+

@@ -9,7 +9,7 @@ get '/game' do
 end
 
 get '/results' do 
-
+  erb :index
 end
 
 get '/results/:id' do
@@ -24,13 +24,14 @@ post '/game' do
     @message = "You can't race against yourself!"
     erb :index
   else
-
-    Player.create(name: params[:player_1])
-    Player.create(name: params[:player_2])
-    redirect to '/game'
+    @players = []
+    @players << Player.find_or_create_by(name: params[:player_1])
+    @players << Player.find_or_create_by(name: params[:player_2])
+    erb :game
+    # redirect to '/game'
   end
 end
 
 post '/results' do
-
+  redirect to '/results'
 end
